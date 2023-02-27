@@ -1,4 +1,4 @@
-﻿﻿import random
+﻿import random
 import json
 from itertools import groupby
 

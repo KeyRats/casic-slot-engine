@@ -49,7 +49,7 @@ def init_service(logger):
         instances = 1
     logger.info(f'Setting {instances} worker instances')
     app.config['ENGINE_INSTANCES'] = tuple(
-        [SlotMachine(CONFIG_PATH, logger)] * instances
+        [SlotMachine(CONFIG_PATH)] * instances
     )
     app.config['LOGGER'] = logger
     app.config['SCHEDULER_API_ENABLED'] = app.config['DEBUG']
@@ -96,17 +96,17 @@ def spin(mode='normal', instance_num=None) -> Tuple[Dict, int]:
         - node assigned for client
         - status code
     """
-    worker = SlotMachine.choose_available_instance(instance_num)
+    worker = app.config['ENGINE_INSTANCES'][0]
     if mode == 'normal':
         app.config['LOGGER'].debug('Rolled in NORMAL mode.')
         return {
             'roll': worker.roll(),
-            'worker_id': worker.id
+            'worker_id': 0
         }, 200
     elif mode == 'bonus':
         # not implemented
         app.config['LOGGER'].debug('Did not roll in BONUS mode.')
-        return {'roll': {}, 'worker_id': worker.id}, 500
+        return {'roll': {}, 'worker_id': 0}, 500
     else:
         app.config['LOGGER'].debug('Got bad roll mode.')
         return {'roll': {}, 'worker_id': 0}, 500
@@ -116,4 +116,4 @@ scheduler.start()
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5001)
