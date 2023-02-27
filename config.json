@@ -30,15 +30,14 @@
       "tag": " wild",
       "rarity": 5,
       "multiplier": 10
-
     }
   ],
   "lines": [
-    "sssss",
-    "ssdss",
-    "ssuss",
-    "sssds",
-    "sssus"
+    "ssss",
+    "sdss",
+    "suss",
+    "ssds",
+    "ssus"
   ],
   "lines_multiplier": {
     "3": 1,
@@ -46,7 +45,4 @@
     "5": 4
   },
   "min_line": 3
-
-
-
 }
